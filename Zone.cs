@@ -8,12 +8,13 @@ namespace Saper
 {
     public static class Zone
     {
-        public static int row = 10;
-        public static int column = 10;
-        public static int bombs = 20;
+        public static int row = 15;
+        public static int column = 15;
+        public static int bombs = 35;
         public static Label CounMines;
         public static int countMines = 0;
         public static int CountOfNotMines = 0;
+        public static bool lose = false;
 
         static pole[,]? zona;
 
@@ -130,7 +131,7 @@ namespace Saper
         {
             Button btn = sender as Button;
             Move(btn);
-            if (CountOfNotMines == 0)
+            if (CountOfNotMines == 0 && lose)
                 Win();
         }
 
@@ -161,7 +162,7 @@ namespace Saper
                     Stretch = Stretch.Fill
 
                 };
-                if (countMines == 0)
+                if (countMines == 0 && lose)
                     checkWinWithFlags();
             }
         }
@@ -281,6 +282,7 @@ namespace Saper
                 Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/xbomb.png")),
                 Stretch = Stretch.Fill
             };
+            lose = false;
         }
 
         private static void Win()

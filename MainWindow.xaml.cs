@@ -27,9 +27,9 @@ namespace Saper
 
         private void NewPlayer(object sender, RoutedEventArgs e)
         {
-            this.Height = 350;
-            this.Width = 280;
-            Zone.row = 10; Zone.column = 10; Zone.bombs = 20;
+            this.Height = 375;
+            this.Width = 300;
+            Zone.row = 10; Zone.column = 10; Zone.bombs = 10;
             LovePl.IsChecked = false;
             ProfPl.IsChecked = false;
             NewPl.IsChecked = true;
@@ -39,9 +39,9 @@ namespace Saper
 
         private void LovePlayer(object sender, RoutedEventArgs e)
         {
-            this.Height = 525;
-            this.Width = 420;
-            Zone.row = 15; Zone.column = 15; Zone.bombs = 45;
+            this.Height = 562.5;
+            this.Width = 450;
+            Zone.row = 15; Zone.column = 15; Zone.bombs = 35;
             LovePl.IsChecked = true;
             ProfPl.IsChecked = false;
             NewPl.IsChecked = false;
@@ -51,9 +51,9 @@ namespace Saper
 
         private void ProfPlayer(object sender, RoutedEventArgs e)
         {
-            this.Height = 700;
-            this.Width = 560;
-            Zone.row = 20; Zone.column = 20; Zone.bombs = 80;
+            this.Height = 750;
+            this.Width = 600;
+            Zone.row = 20; Zone.column = 20; Zone.bombs = 60;
             LovePl.IsChecked = false;
             ProfPl.IsChecked = true;
             NewPl.IsChecked = false;
