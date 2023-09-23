@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Saper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="400" ResizeMode="NoResize" Loaded="New_Game">
+        Title="MainWindow" Height="525" Width="420" ResizeMode="NoResize" Loaded="New_Game">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static local:MainWindow.NewGameCommand}" Executed="New_Game"/>
     </Window.CommandBindings>
@@ -16,9 +16,9 @@
         <Menu VerticalAlignment="Top">
             <MenuItem Header="Игра" FontSize="15" FontFamily="Calibri">
                 <MenuItem Header="Новая игра" InputGestureText="F2" FontFamily="Calibri" Command="{x:Static local:MainWindow.NewGameCommand}"/>
-                <MenuItem Header="Начинающий" IsChecked="False" FontFamily="Calibri"/>
-                <MenuItem Header="Любитель" IsChecked="True" FontFamily="Calibri"/>
-                <MenuItem Header="Профессионал" IsChecked="False" FontFamily="Calibri"/>
+                <MenuItem Name="NewPl" Header="Начинающий" IsChecked="False" FontFamily="Calibri" Click="NewPlayer"/>
+                <MenuItem Name="LovePl" Header="Любитель" IsChecked="True" FontFamily="Calibri" Click="LovePlayer"/>
+                <MenuItem Name="ProfPl" Header="Профессионал" IsChecked="False" FontFamily="Calibri" Click="ProfPlayer"/>
                 <MenuItem Header="Особые..."/>
             </MenuItem>
             <MenuItem Header="Справка" FontSize="15" FontFamily="Calibri">

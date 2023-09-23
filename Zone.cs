@@ -11,21 +11,29 @@ using System.Windows;
 using System.Security.Permissions;
 using System.Windows.Automation.Provider;
 using System.Threading;
+using System.Runtime.CompilerServices;
 
 namespace Saper
 {
     public static class Zone
     {
-        public static int row = 12;
-        public static int column = 12;
+        public static int row = 10;
+        public static int column = 10;
         public static int bombs = 20;
+        public static Label CounMines;
+        public static int countMines = 0;
+        public static int CountOfNotMines = 0;
 
         static pole[,]? zona;
 
-        public static Grid CreateGridForm(Grid grid)
+        public static Grid CreateGridForm(Grid grid, Label la)
         {
             grid.RowDefinitions.Clear();
             grid.ColumnDefinitions.Clear();
+            la.Content = bombs;
+            CounMines = la;
+            CountOfNotMines = row * column - bombs;
+
             zona = new pole[row, column];
             for (int i = 0; i < row; i++)
             {
@@ -131,6 +139,8 @@ namespace Saper
         {
             Button btn = sender as Button;
             Move(btn);
+            if (CountOfNotMines == 0)
+                Win();
         }
 
         private static void BtnRightCLick(object sender, RoutedEventArgs e)
@@ -146,11 +156,13 @@ namespace Saper
                 {
                     uri += "base.png";
                     zona[x, y].isChecked = false;
+                    CounMines.Content = int.Parse(CounMines.Content.ToString()) + 1;
                 }
                 else
                 {
                     uri += "flag.png";
                     zona[x,y].isChecked = true;
+                    CounMines.Content = int.Parse(CounMines.Content.ToString()) - 1;
                 }
                 btn.Content = new Image
                 {
@@ -158,7 +170,27 @@ namespace Saper
                     Stretch = Stretch.Fill
 
                 };
+                if (countMines == 0)
+                    checkWinWithFlags();
             }
+        }
+
+        private static void checkWinWithFlags()
+        {
+            bool iswin = true;
+            for (int i = 0; i < zona.GetLength(0); i++)
+            {
+                for (int l = 0; l < zona.GetLength(1); l++)
+                {
+                    if (zona[i, l].isBomb && !zona[i, l].isChecked)
+                    {
+                        iswin = false;
+                        break;
+                    }
+                }
+            }
+            if (iswin)
+                Win();
         }
 
         private static void Move(object sender)
@@ -184,6 +216,7 @@ namespace Saper
                     if (zona[x, y].bombsNear == 0)
                         OpenNear0(x, y);
                 }
+                CountOfNotMines--;
             }
         }
 
@@ -257,6 +290,11 @@ namespace Saper
                 Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/xbomb.png")),
                 Stretch = Stretch.Fill
             };
+        }
+
+        private static void Win()
+        {
+            MessageBox.Show("U win!!");
         }
     }
 }
