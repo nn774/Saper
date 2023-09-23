@@ -35,7 +35,6 @@ namespace Saper
             GRID = Zone.CreateGridForm(GRID);
             Zone.CreateBombs(GRID);
         }
-
     }
 
 }
