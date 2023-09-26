@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Saper
@@ -20,9 +21,8 @@ namespace Saper
 
         private void New_Game(object sender, RoutedEventArgs e)
         {
-            GRID = Zone.CreateGridForm(GRID, MinesCountLabel);
+            Zone.CreateGridForm(GRID, MinesCountLabel);
             Zone.CreateBombs(GRID);
-
         }
 
         private void NewPlayer(object sender, RoutedEventArgs e)
@@ -33,7 +33,7 @@ namespace Saper
             LovePl.IsChecked = false;
             ProfPl.IsChecked = false;
             NewPl.IsChecked = true;
-            GRID = Zone.CreateGridForm(GRID, MinesCountLabel);
+            Zone.CreateGridForm(GRID, MinesCountLabel);
             Zone.CreateBombs(GRID);
         }
 
@@ -45,7 +45,7 @@ namespace Saper
             LovePl.IsChecked = true;
             ProfPl.IsChecked = false;
             NewPl.IsChecked = false;
-            GRID = Zone.CreateGridForm(GRID, MinesCountLabel);
+            Zone.CreateGridForm(GRID, MinesCountLabel);
             Zone.CreateBombs(GRID);
         }
 
@@ -57,7 +57,7 @@ namespace Saper
             LovePl.IsChecked = false;
             ProfPl.IsChecked = true;
             NewPl.IsChecked = false;
-            GRID = Zone.CreateGridForm(GRID, MinesCountLabel);
+            Zone.CreateGridForm(GRID, MinesCountLabel);
             Zone.CreateBombs(GRID);
         }
     }

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
+using System.Security.Permissions;
 
 namespace Saper
 {
@@ -18,8 +19,9 @@ namespace Saper
 
         static pole[,]? zona;
 
-        public static Grid CreateGridForm(Grid grid, Label la)
+        public static void CreateGridForm(Grid grid, Label la)
         {
+            grid.Children.Clear();
             grid.RowDefinitions.Clear();
             grid.ColumnDefinitions.Clear();
             la.Content = bombs;
@@ -43,12 +45,9 @@ namespace Saper
             {
                 for (int l = 0; l < column; l++)
                 {
-                    Button button = new Button();
-                    button.Name = $"_{i}_{l}";
-                    button.Margin = new Thickness(0, 0, 0, 0);
+                    Button button = new Button {Name = $"_{i}_{l}", Margin = new Thickness(0, 0, 0, 0)};
                     button.Click += BtnCLick;
                     button.MouseRightButtonDown += BtnRightCLick;
-
                     button.Content = new Image
                     {
                         Source = buttonImage,
@@ -61,7 +60,7 @@ namespace Saper
                     zona[i, l] = new pole{ button = button};
                 }
             }
-            return grid;
+            GC.Collect();
         }
 
         public static Grid CreateBombs(Grid grid)
@@ -131,7 +130,7 @@ namespace Saper
         {
             Button btn = sender as Button;
             Move(btn);
-            if (CountOfNotMines == 0 && lose)
+            if (CountOfNotMines == 0 && !lose)
                 Win();
         }
 
@@ -162,7 +161,7 @@ namespace Saper
                     Stretch = Stretch.Fill
 
                 };
-                if (countMines == 0 && lose)
+                if (countMines == 0 && !lose)
                     checkWinWithFlags();
             }
         }
